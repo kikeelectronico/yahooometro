@@ -1,0 +1,6 @@
+FROM python:3.10.0b2-buster AS base
+COPY . /app
+WORKDIR /app
+RUN mkdir shared
+RUN pip install -r requirements.txt
+CMD python bot.py

@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  # Bot
+  yahooometro-bot:
+    image: ghcr.io/kikeelectronico/yahooometro-bot:latest
+    container_name: yahooometro-bot
+    restart: always
+    volumes:
+      - data:/app/data
+
+  # Tasker
+  yahooometro-tasker:
+    image: ghcr.io/kikeelectronico/yahooometro-tasker:latest
+    container_name: yahooometro-tasker
+    restart: always
+    volumes:
+      - data:/app/data
+
+volumes:
+  data:
