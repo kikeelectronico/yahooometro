@@ -6,6 +6,10 @@ services:
     image: ghcr.io/kikeelectronico/yahooometro-bot:latest
     container_name: yahooometro-bot
     restart: always
+    environment:
+      - BOT_TOKEN=value
+      - AUTH_CODE=value
+      - GROUP=value
     volumes:
       - data:/app/data
 
