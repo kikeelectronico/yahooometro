@@ -16,4 +16,4 @@ if __name__ == "__main__":
       f = open('./data/users.json', 'w')
       f.write(json.dumps({"users": users}))
       f.close()
-    time.sleep(3600)
+    time.sleep(1000)
