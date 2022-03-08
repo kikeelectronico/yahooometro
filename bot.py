@@ -12,7 +12,7 @@ GROUP = os.getenv('GROUP')
 bot = telebot.TeleBot(BOT_TOKEN)
 
 def read_users():
-  f = open('users.json', 'r')
+  f = open('./data/users.json', 'r')
   users = json.loads(f.read())
   f.close()
   return users['users']
@@ -24,7 +24,7 @@ def create_user(new_user):
     "id": hashed_user,
     "count": 0
   })
-  f = open('users.json', 'w')
+  f = open('./data/users.json', 'w')
   f.write(json.dumps({"users": users}))
   f.close()
 
@@ -43,7 +43,7 @@ def add_to_counter(user_id):
   for i, user in enumerate(users):
     if bcrypt.checkpw(str(user_id).encode('utf-8'),user['id'][2:-1].encode('utf-8')):
       users[i]['count'] = user['count'] + 1
-  f = open('users.json', 'w')
+  f = open('./data/users.json', 'w')
   f.write(json.dumps({"users": users}))
   f.close()  
 
