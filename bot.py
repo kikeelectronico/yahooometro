@@ -3,6 +3,8 @@ import bcrypt
 import os
 import json
 
+MAX_COUNT = 2
+
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 AUTH_CODE = os.getenv('AUTH_CODE')
 GROUP = os.getenv('GROUP')
@@ -30,7 +32,10 @@ def check_user(user_id):
   users = read_users()
   for user in users:
     if bcrypt.checkpw(str(user_id).encode('utf-8'),user['id'][2:-1].encode('utf-8')):
-      return True
+      if user['count'] < MAX_COUNT:
+        return True
+      else:
+        return False
   return False
 
 
