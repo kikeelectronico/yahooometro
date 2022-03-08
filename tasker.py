@@ -7,7 +7,7 @@ if __name__ == "__main__":
     now = datetime.now()
     hour = now.hour
     minute = now.minute
-    if hour == 21 and minute == 25:
+    if hour == 0 and minute == 0:
       f = open('./data/users.json', 'r')
       users = json.loads(f.read())['users']
       f.close()
@@ -16,4 +16,4 @@ if __name__ == "__main__":
       f = open('./data/users.json', 'w')
       f.write(json.dumps({"users": users}))
       f.close()
-    time.sleep(1000)
+    time.sleep(40)
