@@ -17,7 +17,7 @@ def read_users():
   f.close()
   return users['users']
 
-def save_user(new_user):
+def create_user(new_user):
   hashed_user = str(bcrypt.hashpw(str(new_user).encode('utf-8'), bcrypt.gensalt()))
   users = read_users()
   users.append({
@@ -38,12 +38,20 @@ def check_user(user_id):
         return False
   return False
 
+def add_to_counter(user_id):
+  users = read_users()
+  for i, user in enumerate(users):
+    if bcrypt.checkpw(str(user_id).encode('utf-8'),user['id'][2:-1].encode('utf-8')):
+      users[i]['count'] = user['count'] + 1
+  f = open('users.json', 'w')
+  f.write(json.dumps({"users": users}))
+  f.close()  
+
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
   bot.send_message(message.from_user.id, "Use the command /auth and the code for authorization.")
   bot.send_message(message.from_user.id, "For example: /auth my_auth_code")
-  print(check_user(message.from_user.id))
 
 @bot.message_handler(commands=['auth'])
 def send_welcome(message):
@@ -52,7 +60,7 @@ def send_welcome(message):
       user_auth_code = message.text.split(' ')[1]
       if user_auth_code == AUTH_CODE:
         bot.send_message(message.from_user.id, "Welcome.")
-        save_user(str(message.from_user.id))
+        create_user(str(message.from_user.id))
       else:
         bot.send_message(message.from_user.id, "Try again.")
     else:
@@ -62,9 +70,10 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['yahoo'])
 def send_welcome(message):
-  if not check_user():
-    bot.send_message(message.from_user.id, "I don't know you.")
+  if not check_user(message.from_user.id):
+    bot.send_message(message.from_user.id, "I don't know you or you are using the bot to often.")
   else:
+    add_to_counter(message.from_user.id)
     bot.send_message(message.from_user.id, "Congrats.")
     bot.send_message(GROUP, "Yahoooooooo")
 
