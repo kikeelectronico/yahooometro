@@ -79,8 +79,8 @@ def send_welcome(message):
 
 if __name__ == "__main__":
 
-  if not os.path.exists("./users.json"):
-    f = open('users.json', 'w')
+  if not os.path.exists("./data/users.json"):
+    f = open('./data/users.json', 'w')
     f.write(json.dumps({"users": []}))
     f.close()
 
