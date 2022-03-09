@@ -76,6 +76,8 @@ def send_welcome(message):
     add_to_counter(message.from_user.id)
     bot.send_message(message.from_user.id, "Congrats.")
     bot.send_message(GROUP, "Yahoooooooo")
+    audio_file = open('yodel.mp3', 'rb')
+    bot.send_audio(GROUP, audio_file, performer="Someone", title="Yahoo")
 
 if __name__ == "__main__":
 
