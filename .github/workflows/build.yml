@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           file: Dockerfile-bot
-          platforms: linux/arm/v7
+          platforms: linux/amd64 #, linux/arm/v7
           push: true
           tags: ${{ env.REGISTRY }}/kikeelectronico/yahooometro-bot:latest
   tasker:
@@ -64,6 +64,6 @@ jobs:
         with:
           context: .
           file: Dockerfile-tasker
-          platforms: linux/arm/v7
+          platforms: linux/amd64 #, linux/arm/v7
           push: true
           tags: ${{ env.REGISTRY }}/kikeelectronico/yahooometro-tasker:latest
