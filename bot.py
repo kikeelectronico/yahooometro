@@ -4,7 +4,7 @@ import os
 import json
 
 # Max number of messages a user can send by day
-MAX_COUNT = 2
+MAX_COUNT = 5
 
 # Env vars that configures the bot
 BOT_TOKEN = os.getenv('BOT_TOKEN')  # Telegram bot token
